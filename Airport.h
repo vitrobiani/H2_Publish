@@ -10,6 +10,7 @@
 typedef struct{
     char code[CODE];
     char* name;
+    char* country;
 } Airport;
 
 Airport* initAirport();
@@ -20,9 +21,21 @@ Airport* initAirportNoCode(Airport* port);
 
 void getAirportName(Airport* port);
 
-void printAirport(Airport* port);
+char* makeNameAirporti(char* name);
+
+void getAirportCountry(Airport* port);
+
+void printAirport(Airport const *port);
 
 void freeAirport(Airport* port);
+
+int wordCount(char* str);
+
+char* cleanWhiteSpaceEdges(char* str);
+
+char* addUnderlines(char *formatName);
+
+char* makeSpacesAndNameGood(char *formatName, int wc);
 
 
 #endif // !AIRPORT

@@ -1,8 +1,14 @@
 #include "Airport.h"
+#include "Airline.h"
+#include <ctype.h>
+#include <stdlib.h>
+#include <string.h>
 
-Airport* initAirport(){
-    Airport* airport = (Airport*)malloc(sizeof(Airport));
+Airport *initAirport(Airport *airport) {
+    airport = (Airport *)malloc(sizeof(Airport));
     getAirportCode(airport->code);
+    getAirportName(airport);
+    getAirportCountry(airport);
 
     return airport;
 }
@@ -16,7 +22,7 @@ void getAirportCode(char *airportCode) {
 
         char inputBuffer[maxLength];
         fgets(inputBuffer, sizeof(inputBuffer), stdin);
-        
+
         // Remove the newline character from the input buffer
         size_t inputLength = strlen(inputBuffer);
         if (inputLength > 0 && inputBuffer[inputLength - 1] == '\n') {
@@ -46,7 +52,69 @@ void getAirportCode(char *airportCode) {
     }
 }
 
+void getAirportName(Airport *port) {
+    printf("Enter Airport name: \n");
+    char *name = NULL;
+    size_t size = 0;
+    getline(&name, &size, stdin);
+
+    name = makeNameAirporti(name);
+
+    port->name = name;
+}
+
+char *makeNameAirporti(char *name) {
+    char *formatName = malloc(strlen(name));
+    strcpy(formatName, name);
+
+    formatName = cleanWhiteSpaceEdges(formatName);
+    int wc = wordCount(formatName);
+    if (wc == 1) {
+        formatName = addUnderlines(formatName);
+    } else {
+        formatName = makeSpacesAndNameGood(formatName, wc);
+    }
+
+    return formatName;
+}
 
 
+char* makeSpacesAndNameGood(char *formatName, int wc) {
+    int isEven = wc % 2;
+    int sc = 0;
+    for (int i = 0; i < strlen(formatName); i++) {
+        if (*(formatName + i) == ' ') {
+            sc++;
+        }
+    }
+    char *res = malloc(strlen(formatName) + sc);
+    for (int i = 0, j = 0; i < strlen(formatName); i++) {
+        if (*(formatName + i) == ' ' && *(formatName + i - 1) != ' ') {
+            *(res + j) = ' ';
+            *(res + j + 1) = ' ';
+            j += (isEven) ? 1 : 2;
+        } else if (*(formatName + i) != ' ') {
+            *(res + j) = (*(formatName + i - 1) == ' ' || i == 0)
+                             ? *(formatName + i) - 32
+                             : *(formatName + i);
+            j++;
+        }
+    }
+    *(res + strlen(res)) = '\0';
+    formatName = realloc(res, strlen(res) + 1);
+
+    return formatName;
+}
 
 
+void getAirportCountry(Airport *port) {
+    printf("Enter Airport country:   ");
+    char *name = NULL;
+    size_t size = 0;
+    getline(&name, &size, stdin);
+    port->country = name;
+}
+
+void printAirport(Airport const *port) {
+    printf("Code: %s, Name: %s, Country: %s \n", port->code, port->name, port->country);
+}

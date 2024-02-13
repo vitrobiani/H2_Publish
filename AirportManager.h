@@ -1,16 +1,17 @@
 #ifndef AIRPORTMANAGER
 #define AIRPORTMANAGER
 #include "Airport.h"
-#include "plane.h"
+#include "Plane.h"
 #include "Flight.h"
 
 typedef struct{
-    Airport* theAirports;
+    Airport** theAirports;
     int numOfAirports;
 } AirportManager;
 
-void initManager();
+AirportManager* initManager();
 
+int addAirportToManager(AirportManager* apm, Airport *port);
 
 
 

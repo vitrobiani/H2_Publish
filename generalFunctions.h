@@ -5,9 +5,13 @@
 
 char* getDynamicStr(char* s);
 
+char* rmWhiteSpace(char* name);
 
+int wordCount(char* str);
 
+char* cleanWhiteSpaceEdges(char* str);
 
+char* addUnderlines(char *formatName);
 
 
 
