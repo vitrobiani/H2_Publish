@@ -18,7 +18,7 @@ int wordCount(char *str) {
     if (strlen(str) == 1) {
         return isspace(*str);
     }
-    int wc = 1;
+    int wc = 0;
     for (int i = 1; i < strlen(str); i++) {
         if (*(str + i) == ' ' && (*(str + i - 1) != ' ')) {
             wc++;

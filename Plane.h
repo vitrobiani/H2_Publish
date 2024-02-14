@@ -2,8 +2,8 @@
 #define PLANE
 #include <stdio.h>
 
-typedef enum { Passanger, Cargo, Milltry, noOfType}planeType;
-static const char* planeTypeStr[noOfType] __attribute__((unused)) = {"Passanger", "Cargo", "Milltry" };
+typedef enum { Commercial, Cargo, Military, noOfType}planeType;
+static const char* planeTypeStr[noOfType] __attribute__((unused)) = {"Commercial", "Cargo", "Military" };
 
 typedef struct {
     int serialNum;

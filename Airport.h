@@ -29,12 +29,6 @@ void printAirport(Airport const *port);
 
 void freeAirport(Airport* port);
 
-int wordCount(char* str);
-
-char* cleanWhiteSpaceEdges(char* str);
-
-char* addUnderlines(char *formatName);
-
 char* makeSpacesAndNameGood(char *formatName, int wc);
 
 

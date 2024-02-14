@@ -18,7 +18,7 @@ void getAirportCode(char *airportCode) {
     const int maxLength = 0xff;
 
     while (true) {
-        printf("Enter airport code - %d UPPER CASE letters: ", expectedLength);
+        printf("Enter airport code - %d UPPER CASE letters:\n ", expectedLength);
 
         char inputBuffer[maxLength];
         fgets(inputBuffer, sizeof(inputBuffer), stdin);
@@ -35,7 +35,7 @@ void getAirportCode(char *airportCode) {
             bool isValid = true;
             for (int i = 0; i < expectedLength; ++i) {
                 if (!isupper((unsigned char)inputBuffer[i])) {
-                    puts("All characters must be upper case letters.");
+                    puts("Need to be upper case letter");
                     isValid = false;
                     break;
                 }
@@ -53,14 +53,14 @@ void getAirportCode(char *airportCode) {
 }
 
 void getAirportName(Airport *port) {
-    printf("Enter Airport name: \n");
+    printf("Enter airport name \n");
     char *name = NULL;
     size_t size = 0;
     getline(&name, &size, stdin);
 
-    name = makeNameAirporti(name);
+    char* rname = makeNameAirporti(name);
 
-    port->name = name;
+    port->name = strdup(rname);
 }
 
 char *makeNameAirporti(char *name) {
@@ -68,6 +68,7 @@ char *makeNameAirporti(char *name) {
     strcpy(formatName, name);
 
     formatName = cleanWhiteSpaceEdges(formatName);
+    printf("%s\n", formatName);
     int wc = wordCount(formatName);
     if (wc == 1) {
         formatName = addUnderlines(formatName);
@@ -78,8 +79,7 @@ char *makeNameAirporti(char *name) {
     return formatName;
 }
 
-
-char* makeSpacesAndNameGood(char *formatName, int wc) {
+char *makeSpacesAndNameGood(char *formatName, int wc) {
     int isEven = wc % 2;
     int sc = 0;
     for (int i = 0; i < strlen(formatName); i++) {
@@ -94,18 +94,15 @@ char* makeSpacesAndNameGood(char *formatName, int wc) {
             *(res + j + 1) = ' ';
             j += (isEven) ? 1 : 2;
         } else if (*(formatName + i) != ' ') {
-            *(res + j) = (*(formatName + i - 1) == ' ' || i == 0)
-                             ? *(formatName + i) - 32
-                             : *(formatName + i);
+            *(res + j) = ((*(formatName + i - 1) == ' ' || i == 0) && *(formatName + i) >= 97) ? *(formatName + i) - 32 : *(formatName + i);
             j++;
         }
     }
     *(res + strlen(res)) = '\0';
-    formatName = realloc(res, strlen(res) + 1);
+    formatName = realloc(res, strlen(res));
 
     return formatName;
 }
-
 
 void getAirportCountry(Airport *port) {
     printf("Enter Airport country:   ");
@@ -116,5 +113,18 @@ void getAirportCountry(Airport *port) {
 }
 
 void printAirport(Airport const *port) {
-    printf("Code: %s, Name: %s, Country: %s \n", port->code, port->name, port->country);
+    printf("Code: %s, Name: %s, Country: %s \n", port->code, port->name,
+           port->country);
+}
+
+void freeAirport(Airport *port) {
+    free(port->name);
+    free(port->country);
+    free(port);
+}
+
+
+Airport *initAirportNoCode(Airport *port) {
+    port = initAirport(port);
+    return port;
 }

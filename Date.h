@@ -1,7 +1,7 @@
 #ifndef DATE
 #define DATE
 
-//int const monthDays[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+static int const monthDays[12] __attribute__((unused)) = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 typedef struct{
     int day;
@@ -11,7 +11,7 @@ typedef struct{
 
 int getCorrectDate(Date* d);
 
-int checkDate(int d, int t);
+int checkDate(int d, int m, int y);
 
 void printDate(Date* d);
 
