@@ -1,18 +1,20 @@
-f=*.c
-objs=*.o
-exe=prog
 CC=gcc
-FLAGS=-lm -Wall -Werror 
-DEBUG=-g
+OBJDIR=objdir
+OBJ=$(addprefix $(OBJDIR)/, $(patsubst %.c, %.o, $(wildcard *.c)))
+TARGET=prog
+.PHONY: all clean
 
-$(exe): $(objs) $f
-	$(CC) $(objs) -o prog $(FLAGS) $(DEBUG)
+all: $(OBJDIR) $(TARGET)
 
-$(objs): $f
-	$(CC) -c $f $(FLAGS) $(DEBUG)
+$(OBJDIR):
+	mkdir $(OBJDIR)
+
+$(OBJDIR)/%.o: %.c
+	$(CC) $(CPPFLAGS) -c $< -o $@
+
+$(TARGET): $(OBJ)
+	$(CC) $(LDFLAGS) -o $@ $^ 
 
 clean:
-	rm $(objs)
-
-clr:
-	rm $(objs) $(exe)
+	@rm -f $(TARGET) $(wildcard *.o)
+	@rm -rf $(OBJDIR)

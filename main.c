@@ -50,7 +50,7 @@ int main()
 
 	case 4:
 		getAirportName(&port1);
-		printf("%s\n", port1.name);
+		printf("%s", port1.name);
 		free(port1.name);
 		break;
 

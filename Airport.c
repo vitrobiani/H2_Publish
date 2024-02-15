@@ -68,7 +68,6 @@ char *makeNameAirporti(char *name) {
     strcpy(formatName, name);
 
     formatName = cleanWhiteSpaceEdges(formatName);
-    printf("%s\n", formatName);
     int wc = wordCount(formatName);
     if (wc == 1) {
         formatName = addUnderlines(formatName);
