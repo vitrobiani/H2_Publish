@@ -1,66 +1,37 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "generalFunctions.h"
-#include "Airport.h"
 #include "Plane.h"
-#include "Date.h"
+#include "Airline.h"
+#include "AirportManager.h"
 
 int main()
 {
-
-    char* str = malloc(10);
-    str = getDynamicStr("   hello salkdj sadj k  asdjk   ooo");
-    str = cleanWhiteSpaceEdges(str);
-    printf("%s\n", str);
-    printf("%d\n", wordCount(str));
-    free(str);
-
-
-    int opt;
-	printf("Please choose one of the following options\n");
-	printf("1 - Date\n");
-	printf("2 - Plane\n");
-	printf("3 - Airport Code\n");
-	printf("4 - Airport Name\n");
-	printf("5 - Airport\n");
-	scanf("%d", &opt);
-	getchar();
-	
-	Date d;
-	Plane p;
-	Airport port1;
-	switch (opt)
+	AirportManager manager;
+	int ok = 1;
+	//This function get a pointer to the struct AirportManager 
+	//The function set the array to NULL and count to 0 (always return 1)
+	if (!initManager(&manager))
 	{
-	case 1:
-		getCorrectDate(&d);
-		printDate(&d);
-		printf("\n");
-		break;
+		printf("Error\n");
+		return 0;
+	}
 
-	case 2:
-		initPlane(&p, NULL, 0);
-		printPlane(&p);
-		printf("\n");
-		break;
-
-	case 3:
-		getAirportCode(port1.code);
-		printf("%s\n", port1.code);
-		break;
-
-	case 4:
-		getAirportName(&port1);
-		printf("%s", port1.name);
-		free(port1.name);
-		break;
-
-	case 5:
-		getAirportCode(port1.code);
-		initAirportNoCode(&port1);
-		printAirport(&port1);
-		freeAirport(&port1);
-		break;
-
-}
-
+    printf("%d\n", manager.numOfAirports);
+	for (int i = 0; i < 2; i++)
+	{
+	    //This function get the address of the struct 
+	    //The function add an airport to the array
+		if (!addAirport(&manager))
+		{
+			printf("Error\n");
+			freeManager(&manager);
+			ok = 0;
+			break;
+		}
+	}
+	if(ok)
+	{
+	    printAirports(&manager);
+        freeManager(&manager);
+	}
 }

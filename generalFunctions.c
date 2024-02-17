@@ -19,7 +19,7 @@ int wordCount(char *str) {
         return isspace(*str);
     }
     int wc = 1;
-    for (int i = 1; i < strlen(str); i++) {
+    for (int i = 1; i < (int)strlen(str); i++) {
         if (*(str + i) == ' ' && (*(str + i - 1) != ' ')) {
             wc++;
         }
@@ -46,7 +46,7 @@ char* addUnderlines(char *formatName) {
     int l = strlen(formatName) * 2 - 1;
     formatName = realloc(formatName, l);
     for (int i = strlen(formatName) - 1, j = l - 1; i >= 0; j--, i--) {
-        *(formatName + j) = *(formatName + i) - 32;
+        *(formatName + j) = (*(formatName + i) >= 97) ? *(formatName + i) - 32 : *(formatName + i);
         j--;
         *(formatName + j) = '_';
     }
@@ -58,7 +58,7 @@ char* addUnderlines(char *formatName) {
 char *rmWhiteSpace(char *name) {
     char *formatName = malloc(strlen(name));
     strcpy(formatName, name);
-    for (int i = 0, j = 0; j < strlen(formatName); j++, i++) {
+    for (int i = 0, j = 0; j < (int)strlen(formatName); j++, i++) {
         if (isspace(*(formatName + i))) {
             do {
                 i++;

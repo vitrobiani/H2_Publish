@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
+#include "generalFunctions.h"
 #include <stdlib.h>
 #include <ctype.h>
 #define CODE 3
@@ -13,7 +14,7 @@ typedef struct{
     char* country;
 } Airport;
 
-Airport* initAirport();
+Airport* initAirport(Airport* port);
 
 void getAirportCode(char *airportCode);
 

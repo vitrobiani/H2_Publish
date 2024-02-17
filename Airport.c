@@ -1,11 +1,8 @@
 #include "Airport.h"
-#include "Airline.h"
-#include <ctype.h>
 #include <stdlib.h>
-#include <string.h>
 
 Airport *initAirport(Airport *airport) {
-    airport = (Airport *)malloc(sizeof(Airport));
+    airport = (Airport*)malloc(sizeof(Airport));
     getAirportCode(airport->code);
     getAirportName(airport);
     getAirportCountry(airport);
@@ -15,45 +12,42 @@ Airport *initAirport(Airport *airport) {
 
 void getAirportCode(char *airportCode) {
     const int expectedLength = 3;
-    const int maxLength = 0xff;
 
-    while (true) {
+    do{
         printf("Enter airport code - %d UPPER CASE letters:\n ", expectedLength);
 
-        char inputBuffer[maxLength];
-        fgets(inputBuffer, sizeof(inputBuffer), stdin);
+        char* inputBuffer = NULL;
+        size_t size = 0;
+        getline(&inputBuffer, &size, stdin);
 
-        // Remove the newline character from the input buffer
-        size_t inputLength = strlen(inputBuffer);
+        int inputLength = strlen(inputBuffer);
         if (inputLength > 0 && inputBuffer[inputLength - 1] == '\n') {
             inputBuffer[inputLength - 1] = '\0';
         }
 
-        // Validate the length of the input
-        if (strlen(inputBuffer) == expectedLength) {
-            // Validate that all characters are uppercase letters
+        if ((int)strlen(inputBuffer) == expectedLength) {
             bool isValid = true;
             for (int i = 0; i < expectedLength; ++i) {
-                if (!isupper((unsigned char)inputBuffer[i])) {
-                    puts("Need to be upper case letter");
+                if (!isupper((char)inputBuffer[i])) {
+                    printf("Need to be upper case letter\n");
                     isValid = false;
                     break;
                 }
             }
 
             if (isValid) {
-                // Copy the valid input to the output parameter
                 strcpy(airportCode, inputBuffer);
+                printf("%s\n", airportCode);
                 return;
             }
         } else {
             printf("Code should be %d letters.\n", expectedLength);
         }
-    }
+    }while (true); 
 }
 
 void getAirportName(Airport *port) {
-    printf("Enter airport name \n");
+    printf("Enter airport name\n");
     char *name = NULL;
     size_t size = 0;
     getline(&name, &size, stdin);
@@ -81,13 +75,13 @@ char *makeNameAirporti(char *name) {
 char *makeSpacesAndNameGood(char *formatName, int wc) {
     int isEven = wc % 2;
     int sc = 0;
-    for (int i = 0; i < strlen(formatName); i++) {
+    for (int i = 0; i < (int)strlen(formatName); i++) {
         if (*(formatName + i) == ' ') {
             sc++;
         }
     }
     char *res = malloc(strlen(formatName) + sc);
-    for (int i = 0, j = 0; i < strlen(formatName); i++) {
+    for (int i = 0, j = 0; i < (int)strlen(formatName); i++) {
         if (*(formatName + i) == ' ' && *(formatName + i - 1) != ' ') {
             *(res + j) = ' ';
             *(res + j + 1) = ' ';
@@ -112,8 +106,7 @@ void getAirportCountry(Airport *port) {
 }
 
 void printAirport(Airport const *port) {
-    printf("Code: %s, Name: %s, Country: %s \n", port->code, port->name,
-           port->country);
+    printf("Code: %s, Name: %s, Country: %s \n", port->code, port->name, port->country);
 }
 
 void freeAirport(Airport *port) {
@@ -122,8 +115,9 @@ void freeAirport(Airport *port) {
     free(port);
 }
 
+Airport *initAirportNoCode(Airport *airport) {
+    getAirportName(airport);
+    getAirportCountry(airport);
 
-Airport *initAirportNoCode(Airport *port) {
-    port = initAirport(port);
-    return port;
+    return airport;
 }
