@@ -36,7 +36,6 @@ int isAirportCodeInUse(char *code, AirportManager* const apm){
     return 0;
 }
 
-
 void printAirports(AirportManager* const apm){
     for (int i = 0; i < apm->numOfAirports; i++){
         printAirport(apm->theAirports[i]);
@@ -47,5 +46,5 @@ void freeManager(AirportManager* apm){
     for (int i = 0; i < apm->numOfAirports; i++){
         freeAirport(apm->theAirports[i]);
     }
-    free(apm);
+    free(apm->theAirports);
 }
