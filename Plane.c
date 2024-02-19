@@ -9,9 +9,9 @@ void initPlane(Plane *p, Plane** planeArr, int s) {
 int getPlaneSN(Plane** planeArr, int s) {
     int sn, i = 0;
     do {
-        printf("Enter plane serial number - between %d to %d\n", 1, 0x270f);
+        printf("Enter plane serial number - between %d to %d\n", 1, 9999);
         scanf("%d", &sn);
-        if (sn > 0 && sn <= 0x270f)
+        if (sn > 0 && sn <= 9999)
             i = isSerialNumUnique(planeArr, sn, s);
     } while (i == 0);
     return sn;

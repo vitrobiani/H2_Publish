@@ -1,7 +1,9 @@
 #include "Date.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 int getCorrectDate(Date *d) {
+    d = malloc(sizeof(Date));
     int day, month, year;
     do {
         printf("Enter Flight Date dd##mm##yyyy  minimum year 2023\n");

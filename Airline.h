@@ -7,8 +7,6 @@
 #include "Plane.h"
 #include "Flight.h"
 #include "generalFunctions.h"
-#include "Plane.h"
-
 
 typedef struct{
     char* name;
@@ -29,6 +27,10 @@ void printPlanesArr(Plane* planes, int planeCount);
 void printAirline(Airline* const airline);
 
 void freeCompany(Airline* airline);
+
+Plane* findPlane(Airline* airline);
+
+Plane* findPlaneBySn(Airline* airline, int sn);
 
 #endif // !AIRLINE
 

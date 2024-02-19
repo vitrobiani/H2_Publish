@@ -7,8 +7,8 @@ typedef enum { Commercial, Cargo, Military, noOfType}planeType;
 static const char* planeTypeStr[noOfType] __attribute__((unused)) = {"Commercial", "Cargo", "Military" };
 
 typedef struct {
-    int serialNum;
     planeType type;
+    int serialNum;
 } Plane;
 
 

@@ -9,7 +9,7 @@
 #define CODE 3
 
 typedef struct{
-    char code[CODE];
+    char code[CODE+1];
     char* name;
     char* country;
 } Airport;
