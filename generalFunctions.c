@@ -75,7 +75,6 @@ char *rmWhiteSpace(char *name) {
 char* myGets(char* buffer, int size)
 {
 	char* ok;
-	int res;
 	if (buffer != NULL && size > 0)
 	{
 		do {
