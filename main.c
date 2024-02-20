@@ -1,57 +1,57 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "generalFunctions.h"
-#include "Airport.h"
 #include "Plane.h"
-#include "Date.h"
+#include "Airline.h"
+#include "AirportManager.h"
 
 int main()
 {
-    int opt;
-	printf("Please choose one of the following options\n");
-	printf("1 - Date\n");
-	printf("2 - Plane\n");
-	printf("3 - Airport Code\n");
-	printf("4 - Airport Name\n");
-	printf("5 - Airport\n");
-	scanf("%d", &opt);
-	getchar();
-	
-	Date d;
-	Plane p;
-	Airport port1;
-	switch (opt)
+	AirportManager manager;
+	Airline company;
+
+	if (!initManager(&manager))
 	{
-	case 1:
-		getCorrectDate(&d);
-		printDate(&d);
-		printf("\n");
-		break;
+		printf("Error\n");
+		return 0;
+	}
 
-	case 2:
-		initPlane(&p, NULL, 0);
-		printPlane(&p);
-		printf("\n");
-		break;
+	for (int i = 0; i < 2; i++)
+	{
+		if (!addAirport(&manager))
+		{
+			printf("Error\n");
+			freeManager(&manager);
+			return 0;
+		}
+	}
 
-	case 3:
-		getAirportCode(port1.code);
-		printf("%s\n", port1.code);
-		break;
 
-	case 4:
-		getAirportName(&port1);
-		printf("%s", port1.name);
-		free(port1.name);
-		break;
+	initAirline(&company);
 
-	case 5:
-		getAirportCode(port1.code);
-		initAirportNoCode(&port1);
-		printAirport(&port1);
-		freeAirport(&port1);
-		break;
+	for (int i = 0; i < 2; i++)
+	{
+		if (!addPlane(&company))
+		{
+			printf("Error\n");
+			freeManager(&manager);
+			freeCompany(&company);
+			return 0;
+		}
+	}
+	
 
-}
+	Flight f;
+	//This function get an address of the struct Flight,
+	//A plane that the flight used (I choose the plane in index 0)
+	//and the address of the manager
+	//The function ask the user for code of the origin airport,
+	//code of the destination airport
+	//do checking (there is an airport with that code, not the same airport...)
+	//set the plane of the flight and the date
+    initFlight(&f, &company.planeArr[0], &manager);
+	printFlight(&f);
 
+
+	freeCompany(&company);
+	freeManager(&manager);
 }

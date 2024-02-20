@@ -1,9 +1,4 @@
 #include "AirportManager.h"
-#include "Airport.h"
-#include "Date.h"
-#include "Flight.h"
-#include <stdio.h>
-#include <string.h>
 
 AirportManager *initManager(AirportManager *apm) {
     apm->theAirports = NULL;
@@ -44,6 +39,7 @@ int isAirportCodeInUse(char *code, AirportManager *const apm) {
 }
 
 void printAirports(AirportManager *const apm) {
+    printf("there are %d airports\n", apm->numOfAirports);
     for (int i = 0; i < apm->numOfAirports; i++) {
         printAirport(apm->theAirports[i]);
     }
@@ -56,8 +52,6 @@ void freeManager(AirportManager *apm) {
     free(apm->theAirports);
 }
 
-
-
 Airport* findAirportByCode(AirportManager* apm, char* code){
     for (int i = 0; i < apm->numOfAirports; i++) {
         if (strcmp(apm->theAirports[i]->code, code)) {
@@ -66,3 +60,4 @@ Airport* findAirportByCode(AirportManager* apm, char* code){
     }
     return NULL;
 }
+

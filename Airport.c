@@ -1,6 +1,5 @@
 #include "Airport.h"
 #include "generalFunctions.h"
-#include <stdlib.h>
 
 Airport *initAirport(Airport *airport) {
     airport = (Airport *)malloc(sizeof(Airport));
@@ -14,7 +13,7 @@ Airport *initAirport(Airport *airport) {
 void getAirportCode(char *airportCode) {
     const int expectedLength = 3;
     do {
-        printf("Enter airport code - %d UPPER CASE letters:\n ",
+        printf("Enter airport code - %d UPPER CASE letters\n",
                expectedLength);
 
         char inputBuffer[MAX_LENGTH];
@@ -79,7 +78,7 @@ char *makeSpacesAndNameGood(char *formatName, int wc) {
         }
     }
     char *res = malloc(strlen(formatName) + sc);
-    for (int i = 0, j = 0; i < (int)strlen(formatName)+1; i++) {
+    for (int i = 0, j = 0; i < (int)strlen(formatName); i++) {
         if (*(formatName + i) == ' ' && *(formatName + i - 1) != ' ') {
             *(res + j) = ' ';
             *(res + j + 1) = ' ';
@@ -92,29 +91,28 @@ char *makeSpacesAndNameGood(char *formatName, int wc) {
             j++;
         }
     }
-    *(res + strlen(res)+1) = '\0';
-    formatName = realloc(res, strlen(res)+1);
+    *(res + strlen(res)) = '\0';
+    formatName = realloc(res, strlen(res));
 
     return formatName;
 }
 
 void getAirportCountry(Airport *port) {
-    printf("Enter Airport country:   ");
-    char *name = NULL;
-    size_t size = 0;
-    getline(&name, &size, stdin);
-    port->country = name;
+    printf("Enter Airport country\n");
+    char name[MAX_LENGTH];
+    myGets(name, MAX_LENGTH);
+    char *rname = malloc(strlen(name));
+    strcpy(rname, name);
+    port->country = rname;
 }
 
 void printAirport(Airport const *port) {
-    printf("Code: %s, Name: %s, Country: %s \n", port->code, port->name,
-           port->country);
+    printf("\nAirport name:%-26s Country: %-26s Code:%-26s  \n", port->name, port->country, port->code);
 }
 
 void freeAirport(Airport *port) {
     free(port->name);
     free(port->country);
-    free(port);
 }
 
 Airport *initAirportNoCode(Airport *airport) {

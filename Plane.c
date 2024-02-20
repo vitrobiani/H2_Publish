@@ -1,12 +1,12 @@
 #include "Plane.h"
 
-void initPlane(Plane *p, Plane** planeArr, int s) {
+void initPlane(Plane *p, Plane* planeArr, int s) {
     p->serialNum = getPlaneSN(planeArr, s);
     printf("\n");
     p->type = getPlaneType();
 }
 
-int getPlaneSN(Plane** planeArr, int s) {
+int getPlaneSN(Plane* planeArr, int s) {
     int sn, i = 0;
     do {
         printf("Enter plane serial number - between %d to %d\n", 1, 9999);
@@ -17,9 +17,9 @@ int getPlaneSN(Plane** planeArr, int s) {
     return sn;
 }
 
-int isSerialNumUnique(Plane** planeArr, int sn, int s) {
+int isSerialNumUnique(Plane* planeArr, int sn, int s) {
     for (int i = 0; i < s; i++) {
-        if (planeArr[i]->serialNum == sn)
+        if (planeArr[i].serialNum == sn)
             return 0;
     }
     return 1;

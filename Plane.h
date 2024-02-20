@@ -12,11 +12,11 @@ typedef struct {
 } Plane;
 
 
-void initPlane(Plane* p, Plane** planeArr, int s);
+void initPlane(Plane* p, Plane* planeArr, int s);
 
-int getPlaneSN(Plane** planeArr, int s);
+int getPlaneSN(Plane* planeArr, int s);
 
-int isSerialNumUnique(Plane** planeArr, int sn, int s);
+int isSerialNumUnique(Plane* planeArr, int sn, int s);
  
 planeType getPlaneType();
 

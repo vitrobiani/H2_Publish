@@ -11,7 +11,7 @@
 
 typedef struct{
     char* name;
-    Plane** planeArr;
+    Plane* planeArr;
     Flight** flights;
     int planeCount;
     int flightCount;
@@ -36,8 +36,6 @@ Plane* findPlaneBySn(Airline* airline, int sn);
 void printCompany(Airline* const airline);
 
 int addFlight(Airline* airline, AirportManager* apm);
-
-int getAirportsForFlight(Flight* f, AirportManager* apm);
 
 void doPrintFlightsWithPlaneType(Airline* const airline);
 

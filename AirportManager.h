@@ -3,7 +3,9 @@
 #include <stdlib.h>
 #include "Airport.h"
 #include "Plane.h"
-#include "Flight.h"
+#include <stdio.h>
+#include "Date.h"
+#include <string.h>
 
 typedef struct{
     Airport** theAirports;

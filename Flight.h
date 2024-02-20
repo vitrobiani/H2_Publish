@@ -5,6 +5,7 @@
 #include "Plane.h"
 #include "Airport.h"
 #include "Date.h"
+#include "AirportManager.h"
 
 typedef struct{
     char origin[CODE+1];
@@ -13,7 +14,7 @@ typedef struct{
     Date date;
 }Flight;
 
-Flight* initFlight(Plane* plane, Airport* origin, Airport* destination, Date* date);
+void initFlight(Flight* f, Plane* plane, AirportManager* apm);
 
 int isFlightFromSourceAirport(const Flight* f, char* originCode);
 
@@ -21,4 +22,11 @@ int isFlightToDestAirport(const Flight* f, char* destCode);
 
 int isPlaneTypeInFlight(const Flight* f, planeType type);
 
+int getAirportsForFlight(Flight *f, AirportManager *apm);
+
+void printFlight(Flight* const f);
+
+void freeFlight(Flight* f);
+
+void tempFunction(Flight *f, AirportManager *apm);
 #endif // !FILGHT
