@@ -24,7 +24,6 @@ int wordCount(char *str) {
             wc++;
         }
     }
-    if (wc > 1) wc--;
     return wc;
 }
 
@@ -51,7 +50,7 @@ char* addUnderlines(char *formatName) {
         j--;
         *(formatName + j) = '_';
     }
-    *(formatName + l-2) = '\0';
+    *(formatName + l) = '\0';
 
     return formatName;
 }

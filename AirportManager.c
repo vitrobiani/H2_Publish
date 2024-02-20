@@ -56,45 +56,13 @@ void freeManager(AirportManager *apm) {
     free(apm->theAirports);
 }
 
-int addFlight(Airline *airline, AirportManager *apm) {
-    Flight *f = NULL;
-    if (apm->numOfAirports <= 1) {
-        printf("There are not enough airport to add flight");
-        return 0;
-    } else if (airline->flightCount == 0) {
-        printf("There is no plane in company");
-        return 0;
-    } else {
-        f->plane = findPlane(airline);
-        if (getAirportsForFlight(f, apm) && getCorrectDate(f->date)) return 0;
-    }
-    return 1;
-}
 
-int getAirportsForFlight(Flight *f, AirportManager *apm) {
-    printAirports(apm);
-    int inUse, rot = 0;
-    char *code = NULL;
-    do {
-        printf("Enter code of %s airport:     ",
-               (rot) ? ("destination") : ("origin"));
-        size_t s = 0;
-        getline(&code, &s, stdin);
-        inUse = isAirportCodeInUse(code, apm);
-        if (!inUse) {
-            printf("No airport with this code - try again\n");
-        } else if (inUse && !rot) {
-            strcpy(f->origin, code);
-            rot++;
-        } else if (inUse && rot) {
-            if (!strcmp(code, f->origin)) {
-                printf("Same origin and destination airport\n");
-            }
-            strcpy(f->destination, code);
-        } else {
-            return 0;
+
+Airport* findAirportByCode(AirportManager* apm, char* code){
+    for (int i = 0; i < apm->numOfAirports; i++) {
+        if (strcmp(apm->theAirports[i]->code, code)) {
+            return apm->theAirports[i];
         }
-    } while (!inUse && rot);
-    free(code);
-    return 1;
+    }
+    return NULL;
 }

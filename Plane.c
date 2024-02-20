@@ -29,8 +29,7 @@ planeType getPlaneType() {
     int type;
     do {
         printf("\nPlease enter one of the following types\n");
-        for (int i = 0; i < 3; i++){ 
-            ///*! TODO: enum iteration
+        for (int i = 0; i < noOfType; i++){ 
             printf("%d for %s\n", i, planeTypeStr[i]);
         }
 

@@ -4,7 +4,6 @@
 #include "Airport.h"
 #include "Plane.h"
 #include "Flight.h"
-#include "Airline.h"
 
 typedef struct{
     Airport** theAirports;
@@ -21,8 +20,6 @@ void printAirports(AirportManager* const apm);
 
 int isAirportCodeInUse(char *code, AirportManager* const apm);
 
-int addFlight(Airline* airline, AirportManager* apm);
-
-int getAirportsForFlight(Flight* f, AirportManager* apm);
+Airport* findAirportByCode(AirportManager* apm, char* code);
 
 #endif // !AIRPORTMANAGER

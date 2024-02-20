@@ -9,9 +9,9 @@
 #define CODE 3
 
 typedef struct{
-    char code[CODE+1];
     char* name;
     char* country;
+    char code[CODE+1];
 } Airport;
 
 Airport* initAirport(Airport* port);
@@ -31,6 +31,10 @@ void printAirport(Airport const *port);
 void freeAirport(Airport* port);
 
 char* makeSpacesAndNameGood(char *formatName, int wc);
+
+int isSameAirport(Airport* const port1, Airport* const port2);
+
+int isAirportCode(Airport* const port, char* code);
 
 
 #endif // !AIRPORT

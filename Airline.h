@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include "AirportManager.h"
 #include "Plane.h"
 #include "Flight.h"
 #include "generalFunctions.h"
@@ -31,6 +32,14 @@ void freeCompany(Airline* airline);
 Plane* findPlane(Airline* airline);
 
 Plane* findPlaneBySn(Airline* airline, int sn);
+
+void printCompany(Airline* const airline);
+
+int addFlight(Airline* airline, AirportManager* apm);
+
+int getAirportsForFlight(Flight* f, AirportManager* apm);
+
+void doPrintFlightsWithPlaneType(Airline* const airline);
 
 #endif // !AIRLINE
 

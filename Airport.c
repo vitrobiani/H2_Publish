@@ -1,8 +1,9 @@
 #include "Airport.h"
+#include "generalFunctions.h"
 #include <stdlib.h>
 
 Airport *initAirport(Airport *airport) {
-    airport = (Airport*)malloc(sizeof(Airport));
+    airport = (Airport *)malloc(sizeof(Airport));
     getAirportCode(airport->code);
     getAirportName(airport);
     getAirportCountry(airport);
@@ -12,13 +13,12 @@ Airport *initAirport(Airport *airport) {
 
 void getAirportCode(char *airportCode) {
     const int expectedLength = 3;
+    do {
+        printf("Enter airport code - %d UPPER CASE letters:\n ",
+               expectedLength);
 
-    do{
-        printf("Enter airport code - %d UPPER CASE letters:\n ", expectedLength);
-
-        char* inputBuffer = NULL;
-        size_t size = 0;
-        getline(&inputBuffer, &size, stdin);
+        char inputBuffer[MAX_LENGTH];
+        myGets(inputBuffer, MAX_LENGTH);
 
         int inputLength = strlen(inputBuffer);
         if (inputLength > 0 && inputBuffer[inputLength - 1] == '\n') {
@@ -37,22 +37,20 @@ void getAirportCode(char *airportCode) {
 
             if (isValid) {
                 strcpy(airportCode, inputBuffer);
-                printf("%s\n", airportCode);
                 return;
             }
         } else {
             printf("Code should be %d letters.\n", expectedLength);
         }
-    }while (true); 
+    } while (true);
 }
 
 void getAirportName(Airport *port) {
     printf("Enter airport name\n");
-    char *name = NULL;
-    size_t size = 0;
-    getline(&name, &size, stdin);
+    char name[MAX_LENGTH];
+    myGets(name, MAX_LENGTH);
 
-    char* rname = makeNameAirporti(name);
+    char *rname = makeNameAirporti(name);
 
     port->name = strdup(rname);
 }
@@ -81,18 +79,21 @@ char *makeSpacesAndNameGood(char *formatName, int wc) {
         }
     }
     char *res = malloc(strlen(formatName) + sc);
-    for (int i = 0, j = 0; i < (int)strlen(formatName); i++) {
+    for (int i = 0, j = 0; i < (int)strlen(formatName)+1; i++) {
         if (*(formatName + i) == ' ' && *(formatName + i - 1) != ' ') {
             *(res + j) = ' ';
             *(res + j + 1) = ' ';
             j += (isEven) ? 1 : 2;
         } else if (*(formatName + i) != ' ') {
-            *(res + j) = ((*(formatName + i - 1) == ' ' || i == 0) && *(formatName + i) >= 97) ? *(formatName + i) - 32 : *(formatName + i);
+            *(res + j) = ((*(formatName + i - 1) == ' ' || i == 0) &&
+                          *(formatName + i) >= 97)
+                             ? *(formatName + i) - 32
+                             : *(formatName + i);
             j++;
         }
     }
-    *(res + strlen(res)) = '\0';
-    formatName = realloc(res, strlen(res));
+    *(res + strlen(res)+1) = '\0';
+    formatName = realloc(res, strlen(res)+1);
 
     return formatName;
 }
@@ -106,7 +107,8 @@ void getAirportCountry(Airport *port) {
 }
 
 void printAirport(Airport const *port) {
-    printf("Code: %s, Name: %s, Country: %s \n", port->code, port->name, port->country);
+    printf("Code: %s, Name: %s, Country: %s \n", port->code, port->name,
+           port->country);
 }
 
 void freeAirport(Airport *port) {
