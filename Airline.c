@@ -1,9 +1,4 @@
 #include "Airline.h"
-#include "Flight.h"
-#include "Plane.h"
-#include "generalFunctions.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 Airline *initAirline(Airline *airline) {
     char *name = initAirlineName();
