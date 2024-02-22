@@ -8,6 +8,7 @@ int getCorrectDate(Date *d) {
         printf("Enter Flight Date dd##mm##yyyy  minimum year 2023\n");
         scanf("%d##%d##%d", &day, &month, &year);
         while (getchar() != '\n'); 
+        printf("%d %d %d", day, month, year);
     } while (checkDate(day, month, year) == 0);
 
     d->day = day;
@@ -30,5 +31,5 @@ int checkDate(int d, int m, int y) {
 }
 
 void printDate(Date *d) {
-    printf("Date: %d/%d/%d", d->day, d->month, d->year);
+    printf("Date: %02d/%02d/%04d", d->day, d->month, d->year);
 }
