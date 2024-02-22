@@ -11,10 +11,9 @@ Airport *initAirport(Airport *airport) {
 }
 
 void getAirportCode(char *airportCode) {
-    const int expectedLength = 3;
     do {
-        printf("Enter airport code - %d UPPER CASE letters\n",
-               expectedLength);
+        printf("Enter airport code  - %d UPPER CASE letters      \n", CODE);
+        int expectedLength = CODE;
 
         char inputBuffer[MAX_LENGTH];
         myGets(inputBuffer, MAX_LENGTH);
@@ -98,7 +97,7 @@ char *makeSpacesAndNameGood(char *formatName, int wc) {
 }
 
 void getAirportCountry(Airport *port) {
-    printf("Enter Airport country\n");
+    printf("Enter airport country   \n");
     char name[MAX_LENGTH];
     myGets(name, MAX_LENGTH);
     char *rname = malloc(strlen(name));
@@ -107,7 +106,7 @@ void getAirportCountry(Airport *port) {
 }
 
 void printAirport(Airport const *port) {
-    printf("\nAirport name:%-26s Country: %-26s Code:%-26s  \n", port->name, port->country, port->code);
+    printf("Airport name:%-26s Country: %-26s Code:%s\n", port->name, port->country, port->code);
 }
 
 void freeAirport(Airport *port) {

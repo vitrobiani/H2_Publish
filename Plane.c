@@ -4,6 +4,7 @@ void initPlane(Plane *p, Plane* planeArr, int s) {
     p->serialNum = getPlaneSN(planeArr, s);
     printf("\n");
     p->type = getPlaneType();
+    printf("\n");
 }
 
 int getPlaneSN(Plane* planeArr, int s) {
@@ -33,12 +34,13 @@ planeType getPlaneType() {
             printf("%d for %s\n", i, planeTypeStr[i]);
         }
 
+        //TODO no protection here
         scanf("%d", &type);
     } while (type < 0 || type > 2);
     return type;
 }
 
 void printPlane(Plane *const p) {
-    printf("\nPlane: serial number:%d, type: %s", p->serialNum, planeTypeStr[p->type]);
+    printf("Plane: serial number:%d, type %s", p->serialNum, planeTypeStr[p->type]);
 }
 

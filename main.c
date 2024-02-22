@@ -14,21 +14,9 @@ int main()
 		printf("Error\n");
 		return 0;
 	}
-
-	for (int i = 0; i < 2; i++)
-	{
-		if (!addAirport(&manager))
-		{
-			printf("Error\n");
-			freeManager(&manager);
-			return 0;
-		}
-	}
-
-
 	initAirline(&company);
 
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		if (!addPlane(&company))
 		{
@@ -39,18 +27,37 @@ int main()
 		}
 	}
 	
+	addFlight(&company, &manager);
+	addAirport(&manager);
+	addFlight(&company, &manager);
 
-	Flight f;
-	//This function get an address of the struct Flight,
-	//A plane that the flight used (I choose the plane in index 0)
-	//and the address of the manager
-	//The function ask the user for code of the origin airport,
-	//code of the destination airport
-	//do checking (there is an airport with that code, not the same airport...)
-	//set the plane of the flight and the date
-    initFlight(&f, &company.planeArr[0], &manager);
-	printFlight(&f);
+	for (int i = 0; i < 3; i++)
+	{
+		if (!addAirport(&manager))
+		{
+			printf("Error\n");
+			freeManager(&manager);
+			freeCompany(&company);
+			return 0;
+		}
+	}
 
+	for (int i = 0; i < 3; i++)
+	{
+		if (!addFlight(&company, &manager))
+		{
+
+			printf("Error\n");
+			freeManager(&manager);
+			freeCompany(&company);
+			return 0;
+		}
+	}
+
+	printCompany(&company);
+	
+	for (int i = 0; i < 3; i++)
+		doPrintFlightsWithPlaneType(&company);
 
 	freeCompany(&company);
 	freeManager(&manager);
