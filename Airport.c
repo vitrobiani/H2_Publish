@@ -1,5 +1,4 @@
 #include "Airport.h"
-#include "generalFunctions.h"
 
 Airport *initAirport(Airport *airport) {
     airport = (Airport *)malloc(sizeof(Airport));
@@ -18,7 +17,7 @@ void getAirportCode(char *airportCode) {
         char inputBuffer[MAX_LENGTH];
         myGets(inputBuffer, MAX_LENGTH);
 
-        int inputLength = strlen(inputBuffer);
+        int inputLength = (int)strlen(inputBuffer);
         if (inputLength > 0 && inputBuffer[inputLength - 1] == '\n') {
             inputBuffer[inputLength - 1] = '\0';
         }
@@ -76,7 +75,8 @@ char *makeSpacesAndNameGood(char *formatName, int wc) {
             sc++;
         }
     }
-    char *res = malloc(strlen(formatName) + sc);
+    size_t size = (unsigned long)((int)strlen(formatName) + sc);
+    char *res = malloc(size);
     for (int i = 0, j = 0; i < (int)strlen(formatName); i++) {
         if (*(formatName + i) == ' ' && *(formatName + i - 1) != ' ') {
             *(res + j) = ' ';

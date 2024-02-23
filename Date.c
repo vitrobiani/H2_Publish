@@ -1,14 +1,15 @@
 #include "Date.h"
 #include <stdio.h>
+#include "generalFunctions.h"
 #include <stdlib.h>
 
 int getCorrectDate(Date *d) {
     int day, month, year;
+    char date[MAX_LENGTH];
     do {
         printf("Enter Flight Date dd##mm##yyyy  minimum year 2023\n");
-        scanf("%d##%d##%d", &day, &month, &year);
-        while (getchar() != '\n'); 
-        printf("%d %d %d", day, month, year);
+        myGets(date, MAX_LENGTH);
+        sscanf(date, "%d##%d##%d", &day, &month, &year);
     } while (checkDate(day, month, year) == 0);
 
     d->day = day;
@@ -19,10 +20,10 @@ int getCorrectDate(Date *d) {
 }
 
 int checkDate(int d, int m, int y) {
-    int isCorrectDate =
-        (m < 1 || m > 12) || (d < 1 || d > monthDays[m - 1]) || (y < 2023);
+    int isNotCorrectDate =
+        (m < 1 || m > 12) || (d < 1 || d > monthDays[m - 1]) || (y < 2023 || y > 9999);
 
-    if (isCorrectDate) {
+    if (isNotCorrectDate) {
         printf("Error try again\n");
         return 0;
     }

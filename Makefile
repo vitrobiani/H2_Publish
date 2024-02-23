@@ -2,7 +2,7 @@ CC=gcc
 OBJDIR=objdir
 OBJ=$(addprefix $(OBJDIR)/, $(patsubst %.c, %.o, $(wildcard *.c)))
 TARGET=prog
-CFLAGS=-g -Wall -Werror -Wpedantic -Wextra
+CFLAGS=-g -Wall -Werror -Wpedantic -Wextra -Wabi=11 -Wconversion -Wshadow -Wstrict-prototypes -Wformat=2
 LDFLAGS= -lm
 .PHONY: all clean
 

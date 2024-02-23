@@ -3,9 +3,9 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
-#include "generalFunctions.h"
 #include <stdlib.h>
 #include <ctype.h>
+#include "generalFunctions.h"
 #define CODE 3
 
 typedef struct{

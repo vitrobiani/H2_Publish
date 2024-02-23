@@ -4,9 +4,6 @@
 #include "Plane.h"
 #include "Date.h"
 
-
-
-
 int main()
 {
 	int opt;
